@@ -1,0 +1,41 @@
+
+qli_to_svg provides a simple conversion of QLI format files to SVG files. 
+qli_to_svg also supports conversion to raster file formats supported by
+the ImageMagic "convert" tool.
+
+QLI files are the predominant format for the Statler Stitcher by Gammill®. 
+The QLI format defines a collection of stitching paths. The file format is 
+a subset of the Galil DMC language, although, no official information
+from Gammill has been made available.
+
+This is provided in an open source format in the hope that someone else may
+find this useful.
+
+Feel welcome to raise issues at:
+  https://bitbucket.org/owebeeone/qli_to_cvg/issues?status=new&status=open
+I make no promise to look at them but I will, time permitting.  However raising
+issues will likely get a response while emailing me directly will likely not.
+
+To use qli_to_svg run the following command see some usages:
+    qli_to_svg.py --help
+    
+You will need python 2.7 and the python packages "svg.path" installed on 
+your computer.
+
+Copyriht Notice:
+    This file is authored by Gianni Mariani <gianni@mariani.ws>. 27-May-2016.
+
+    This file is part of qli_to_svg.
+
+    qli_to_svg is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    qli_to_svg is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with qli_to_svg.  If not, see <http://www.gnu.org/licenses/>.
