@@ -154,8 +154,10 @@ class BitMaskArg(Arg):
 class Syntax(object):
     """ Defines a syntax. In the DMC language some constructs (REM) must
     occur at the beginning of the line.
-    regex : The regular expression that matches the construct.
+    regex : The regular expression that matches the beginning of the construct.
     bol_only : indicates that this can only be matched a the beginning of a line.
+    name : Optional name if the regex can't be used.
+    terminator : What must be found to end the construct, usually a \n or ';'
     """
     def __init__(self, command, *args, **kwds):
         self.name = kwds.pop('name', command)
@@ -185,7 +187,7 @@ class Syntax(object):
                 group_index += arg.group_count
 
 class Command(object):
-    """Command is an instance of a "command". These specify how to parse
+    """Command is an instance of a DMC "command". These specify how to parse
     the command from the input.
     """
     def __init__(self, groups, input_str, pos, lineno):
@@ -203,7 +205,7 @@ class RemComment(Command):
     SYNTAX = Syntax("REM", MatchAllArg(), bol_only=True)
         
 class QuoteComment(Command):
-    SYNTAX = Syntax("'|\"", MatchAllArg(), name='quote')  # A single ' to the endo of line.
+    SYNTAX = Syntax("'|\"", MatchAllArg(), name='quote')  # A single ' or " to the end of line.
         
 class NeedleOn(Command):
     SYNTAX = Syntax("NO NEEDLE ON", MatchAllArg(), name='needle_on')
@@ -259,9 +261,15 @@ class EmptyLine(Command):
     SYNTAX = Syntax("", name='empty')
         
 class UnicodeBom(Command):
+    # Some files contain a UTF8 BOM character which technically is illegal but some unicode
+    # conversions incorrectly insert them. Let's eat them and ignore them.
     SYNTAX = Syntax("\xEF\xBB\xBF", name='unicode_bom', terminator='')
         
-
+# A list of all regognized DMC commands. Add more as needed.
+# Note that the QliRunner class must have a do<Class Name>() function for each element
+# in this list.  When run, the functions are called.
+# Because of the way we parse, we need the most commonly used commands at the front
+# to make the parsing most efficient.
 COMMANDS = [
     Circle,
     VectorPosition,
