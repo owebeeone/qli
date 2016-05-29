@@ -78,6 +78,7 @@ DEFAULT_OUT_FORMAT='{base_name}.svg'
 DEFAULT_FILE_EXTENSION='qli'
 
 class RasterParams(value_type.ValueSpec):
+    """Defines parameters for creating raster images using ImageMagick convert."""
     VALUE_DELIMITER = ':'
     FIELDS = (value_type.ValueField('raster_type', str, 'jpg', 'Raster output type'),
               value_type.ValueField('convert_args', str, '', 'Args to convert'),
@@ -130,12 +131,12 @@ def readQliFile(filename):
         sys.stderr.write("File: %s %s" % (filename, e))
         return None, e
 
-# group 1:parth, 2:basename, 3:extension
+# group 1:path, 2:basename, 3:extension
 FILE_NAME_RE = re.compile("(?:(.*[^/]|)/+)?([^/]*)(\\.[^\\./]*)")
 
 def processQli(filename, prog, outname, svg_out_params=qli_svg.SvgOutputParams(), 
                convert_params=ConvertParams()):
-    """Process a Qli program by generating SVG data.
+    """Process a Qli program for generating SVG data.
     """
     try:
         converter = qli_svg.QliSvgExecutor(prog)
@@ -181,8 +182,8 @@ def error_exit(message):
     sys.exit(1)
 
 def make_outfile_name(filename, dir_format, file_format, **kwds):
-    """Creates an output filename from in input file name and format
-    strings for directory and file.
+    """Creates an output filename from in input filename and format
+    strings for directory and file and miscellaneous other parameters.
     """
     match = FILE_NAME_RE.match(filename)
     if not match:
@@ -231,7 +232,7 @@ def main(argv):
     convert_params.set_parsed_args(args)
     
     filenames = args.inputs if args.inputs else ['-']
-    # Make a reversed copy
+    # Make a reversed copy, better for large lists.
     stack = filenames[::-1]
     
     try:
@@ -265,6 +266,7 @@ def main(argv):
     except KeyboardInterrupt, e:
         sys.stderr.write('\n\n')
         traceback.print_exc()
+        # If the code gets stuck, it's good to know which file it was stuck on.
         sys.stderr.write('\nInterrupted at file: %s\n\n' % filename)
         return 1
     if errors:
