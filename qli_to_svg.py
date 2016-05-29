@@ -52,16 +52,23 @@ To convert an entire directory hierarchy of qli files:
   All files named .qli will have a new file with the suffix replaced with .svg
   
 To remove the border on the generated files:
-  {0} a-file.qli --borders 'green:2' a-file.qli
+  {0} --borders '' a-file.qli
+  
+To place the border on the shape extents:
+  {0} --borders 'green:0' a-file.qli
   
 To add two borders:
-  {0} a-file.qli --borders 'blue:1,red:0' a-file.qli
-  The second border will be drawn directly on the image boundary
+  {0} --borders 'blue:1,red:0' a-file.qli
+  The second border will be drawn directly on the shape extents.
   
 To additionally convert to to a jpeg image:
-  {0} a-file.qli --raster_out png a-file.qli
+  {0} --raster_out png a-file.qli
   The raster out parameter is a comma separated list of a 4 tuple.
       type:<convert parameters>:<file format>:<out directory format>
+  
+Produce SVG with no margin or border and double wide lines:
+  {0} --margin 0x0 --borders '' --line_width 2 a-file.qli
+  The resulting file will have no border.
   
 """.format(sys.argv[0])
 
