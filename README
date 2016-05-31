@@ -21,21 +21,3 @@ To use qli_to_svg run the following command see some usages:
     
 You will need python 2.7 and the python packages "svg.path" installed on 
 your computer.
-
-Copyriht Notice:
-    This file is authored by Gianni Mariani <gianni@mariani.ws>. 27-May-2016.
-
-    This file is part of qli_to_svg.
-
-    qli_to_svg is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    qli_to_svg is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with qli_to_svg.  If not, see <http://www.gnu.org/licenses/>.
