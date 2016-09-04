@@ -1,4 +1,3 @@
-
 qli_to_svg provides a simple conversion of QLI format files to SVG files. 
 qli_to_svg also supports conversion to raster file formats supported by
 the ImageMagic "convert" tool.
@@ -12,7 +11,7 @@ This is provided in an open source format in the hope that someone else may
 find this useful.
 
 Feel welcome to raise issues at:
-  https://bitbucket.org/owebeeone/qli_to_cvg/issues?status=new&status=open
+  https://bitbucket.org/owebeeone/qli_to_svg/issues?status=new&status=open
 I make no promise to look at them but I will, time permitting.  However raising
 issues will likely get a response while emailing me directly will likely not.
 
