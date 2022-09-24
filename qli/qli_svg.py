@@ -25,10 +25,18 @@ Copyriht Notice:
 import cmath
 import math
 import numpy
-import qli
+import svg.path as svg
+from qli import qli
+
 import sys
-import svg.path
 import value_type
+
+from dataclasses import dataclass
+
+# @dataclass
+# class Hack:
+#     path: str
+# svg = Hack(svg_path)
 
 def merge_dicts(*dict_args):
     """""Given any number of dicts, shallow copy and merge into a new dict,
@@ -47,11 +55,11 @@ def condition_floats(epsilon=EPLSILON, **kwds):
     insignificant jibberish.
     """
     max_abs = 0
-    for k, v in kwds.iteritems():
+    for k, v in kwds.items():
         max_abs = max(max_abs, abs(v))
     
     result = {}
-    for k, v in kwds.iteritems():
+    for k, v in kwds.items():
         if abs(v) / epsilon < max_abs:
             result[k] = 0
         else:
@@ -164,6 +172,11 @@ class SvgPath(object):
         self.needle_state = needle_state
         self.path = path
         self.alternate_color = alternate_color
+        
+        first = self.path[0]
+        if not isinstance(first, svg.path.Move):
+            self.path.insert(0, svg.path.Move(first.start))
+        
         
     def svg(self, context):
         params = context.params

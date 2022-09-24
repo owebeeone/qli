@@ -31,16 +31,16 @@ Copyriht Notice:
 import argparse
 import math
 import os
-from qli import qli
-from qli import qli_svg
+import qli.qli as qli
+import qli_svg
+import value_type
 import re
-import StringIO
+#import StringIO
 import sys
 import textwrap
-from qli import value_type
-from cStringIO import cStringIO_CAPI
 import traceback
 import subprocess
+import traceback
 
 EXAMPLE_USAGE = """
 To convert a single file from qli format to svg:
@@ -127,7 +127,7 @@ def readQliFile(filename):
 
     try:
         return qli.QliProgram(filename, qli.Qli(f)), None
-    except qli.QliSyntaxError, e:
+    except qli.QliSyntaxError as e:
         sys.stderr.write("File: %s %s" % (filename, e))
         return None, e
 
@@ -161,8 +161,8 @@ def processQli(filename, prog, outname, svg_out_params=qli_svg.SvgOutputParams()
         f.close()
         
         return True
-    except Exception, e:
-        sys.stderr.write(str(e))
+    except:
+        traceback.print_exception(*sys.exc_info())
         return False
 
 def find_recursive(dir, suffix):
@@ -263,7 +263,7 @@ def main(argv):
                     return 1
                 generate_raster(outname, filename, convert_params)
 
-    except KeyboardInterrupt, e:
+    except KeyboardInterrupt as e:
         sys.stderr.write('\n\n')
         traceback.print_exc()
         # If the code gets stuck, it's good to know which file it was stuck on.

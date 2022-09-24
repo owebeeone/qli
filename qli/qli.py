@@ -181,7 +181,7 @@ class Syntax(object):
                 try:
                     value = arg.parse(
                             command.groups[group_index + 1:(group_index + arg.group_count + 1)])
-                except FormatError, e:
+                except FormatError as e:
                     command.raiseFormatError(arg, e)
                 setattr(command, arg.name, value)
                 group_index += arg.group_count
@@ -362,13 +362,13 @@ class Qli:
  
     def parse(self, inputvalue):
         """Parses a file like object."""
-        if isinstance(inputvalue, file):
+        if isinstance(inputvalue, str):
+            self.commands.extend(SCANNER.scan(input))
+        else:
             for lineno, line in enumerate(inputvalue):
                 if line[-1] != '\n':
                     line += '\n'
                 self.commands.extend(SCANNER.scan(line, lineno=lineno))
-        else:
-            self.commands.extend(SCANNER.scan(input))
 
 
 class QliRunner(object):
@@ -480,7 +480,7 @@ class QliProgram(QliRunner):
                 executor.program_index += 1
                 func = getattr(executor, command.commandName)
                 func(index, command)
-        except Exception, e:
+        except Exception as e:
             raise ExecutionException('file: "' + self.filename + '"', e, traceback.format_exc())
     
     def doLabel(self, index, command):
