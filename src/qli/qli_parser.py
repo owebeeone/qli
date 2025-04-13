@@ -26,7 +26,6 @@ Copyriht Notice:
 import re
 import sys
 import traceback
-from operator import pos
 
 def log(st, **kwds):
     sys.stderr.write(st + ": " + repr(kwds) + "\n")
@@ -58,7 +57,7 @@ class FormatError(Exception):
 
 TERMINATOR = "(?:\\s*[;\n]|\r\n)"
 NON_TERM_STR = "[^;\n]*"
-NUMBER_RE = "\\s*([0-9.*/+\-@\[\(\]\)A-Z]*)\\s*"
+NUMBER_RE = "\\s*([0-9.*/+\\-@\\[\\(\\]\\)A-Z]*)\\s*"
 COMMA_NUMBER_RE = "," + NUMBER_RE
 OPTIONAL_LT_NUMBER_RE = "(?:\\s*<" + NUMBER_RE + ")?"
 OPTIONAL_GT_NUMBER_RE = "(?:\\s*>" + NUMBER_RE + ")?"
@@ -78,10 +77,10 @@ class Arg(object):
             return groups[0]
         return ''.join(groups)
         
-CRAXY1 = "(?:@RND\\[([+\-]?[0-9]*\\.?[0-9]+)\\*S.\\])"
-CRAXY2 = "(?:\\(([+\-]?[0-9]*\\.?[0-9]+)\\*S.\\))"
+CRAXY1 = "(?:@RND\\[([+\\-]?[0-9]*\\.?[0-9]+)\\*S.\\])"
+CRAXY2 = "(?:\\(([+\\-]?[0-9]*\\.?[0-9]+)\\*S.\\))"
 class NumberArg(Arg):
-    RE = re.compile('([+\-]?[0-9]*\\.?[0-9]+)|%s' % '|'.join((CRAXY1, CRAXY2)))
+    RE = re.compile('([+\\-]?[0-9]*\\.?[0-9]+)|%s' % '|'.join((CRAXY1, CRAXY2)))
 
     def __init__(self, name, required=True):
         self.init(name, NUMBER_RE, 1, required)

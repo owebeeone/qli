@@ -26,10 +26,10 @@ import cmath
 import math
 import numpy
 import svg.path as svg
-from qli_to_svg.qli import qli
+from qli import qli_parser
 
 import sys
-from qli_to_svg.qli import value_type
+from qli import value_type
 
 from dataclasses import dataclass
 
@@ -234,11 +234,11 @@ class SvgPattern(object):
         pattern.write(f, context)        
 
 
-class QliSvgExtentsExecutor(qli.QliExecutor):
+class QliSvgExtentsExecutor(qli_parser.QliExecutor):
     """Computes the entents of a pattern.
     """
     def __init__(self, program):
-        qli.QliExecutor.__init__(self, program)
+        qli_parser.QliExecutor.__init__(self, program)
         self.axes = (0, 1)
         self.cur_loc = 0j
         self.min_extent = 0j
@@ -301,10 +301,10 @@ class QliSvgExtentsExecutor(qli.QliExecutor):
         return (self.min_extent, self.max_extent)
     
 
-class QliSvgExecutor(qli.QliExecutor):
+class QliSvgExecutor(qli_parser.QliExecutor):
     
     def __init__(self, program):
-        qli.QliExecutor.__init__(self, program)
+        qli_parser.QliExecutor.__init__(self, program)
         self.axes = (0, 1)
         self.needle_on = True
         self.svg_current_path = svg.path.Path()

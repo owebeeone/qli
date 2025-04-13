@@ -1,5 +1,5 @@
-qli_to_svg provides a simple conversion of QLI format files to SVG files. 
-qli_to_svg also supports conversion to raster file formats supported by
+QLI provides a simple conversion of QLI format files to SVG files. 
+QLI also supports conversion to raster file formats supported by
 the ImageMagic "convert" tool.
 
 QLI files are the predominant format for the Statler Stitcher by Gammill®. 
@@ -10,12 +10,12 @@ from Gammill has been made available.
 This is provided in an open source format in the hope that someone else may
 find this useful.
 
-Feel welcome to raise issues at:
-  https://bitbucket.org/owebeeone/qli_to_svg/issues?status=new&status=open
+Feel welcome to raise issues at: https://github.com/owebeeone/qli/issues
+  
 I make no promise to look at them but I will, time permitting.  However raising
 issues will likely get a response while emailing me directly will likely not.
 
-To use qli_to_svg run the following command see some usages:
+To use QLI run the following command see some usages:
     qli_to_svg.py --help
     
 You will need python 2.7 and the python packages "svg.path" installed on 

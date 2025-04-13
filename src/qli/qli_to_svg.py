@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
 Converts from Statler Stitcher Gammill® QLI files to SVG format.
 
@@ -29,18 +27,15 @@ Copyriht Notice:
 """
 
 import argparse
-import math
 import os
-from qli_to_svg.qli import qli
-from qli_to_svg.qli import qli_svg
-from qli_to_svg.qli import value_type
+from qli import qli_parser
+from qli import qli_svg
+from qli import value_type
 import re
-#import StringIO
 import sys
 import textwrap
 import traceback
 import subprocess
-import traceback
 
 EXAMPLE_USAGE = """
 To convert a single file from qli format to svg:
@@ -119,6 +114,7 @@ def readQliFile(filename):
     f = None
     if filename == '-':
         f = sys.stdin
+        sys.stderr.write("No file provided, reading from standard input:\n")
     else:
         f = open(filename, 'r')
         if not f:
@@ -126,8 +122,8 @@ def readQliFile(filename):
             return None
 
     try:
-        return qli.QliProgram(filename, qli.Qli(f)), None
-    except qli.QliSyntaxError as e:
+        return qli_parser.QliProgram(filename, qli_parser.Qli(f)), None
+    except qli_parser.QliSyntaxError as e:
         sys.stderr.write("File: %s %s" % (filename, e))
         return None, e
 
