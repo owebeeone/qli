@@ -31,9 +31,9 @@ Copyriht Notice:
 import argparse
 import math
 import os
-import qli.qli as qli
-import qli_svg
-import value_type
+from qli_to_svg.qli import qli
+from qli_to_svg.qli import qli_svg
+from qli_to_svg.qli import value_type
 import re
 #import StringIO
 import sys

@@ -1,0 +1,42 @@
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "anchorscad-core"
+version = "0.1.3"
+authors = [
+    { name = "Gianni Mariani", email = "gianni@mariani.ws" },
+]
+description = "A Python 3D modelling API for generating OpenSCAD source code. This library simplifies the creating of 3D models. This contains only the core API and some generic basic models."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "datatrees>=0.1.9",
+    "frozendict",
+    "debugpy",
+    "svg.path",
+]
+
+[project.urls]
+Homepage = "https://github.com/owebeeone/qli_to_svg"
+"Bug Tracker" = "https://github.com/owebeeone/qli_to_svg/issues"
+
+[tool.hatch.envs.test]
+dependencies = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/anchorscad",
+    "src/anchorscad_models",
+]

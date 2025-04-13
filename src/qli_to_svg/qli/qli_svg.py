@@ -26,10 +26,10 @@ import cmath
 import math
 import numpy
 import svg.path as svg
-from qli import qli
+from qli_to_svg.qli import qli
 
 import sys
-import value_type
+from qli_to_svg.qli import value_type
 
 from dataclasses import dataclass
 
