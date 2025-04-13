@@ -81,7 +81,7 @@ SVG_FOOTER = """
 def mat_rot(rotation):
     """Converts a rotation complex number (a complex number with unit size) to an
     equivalent 3x3 homogenous matrix."""
-    return numpy.matrix([
+    return numpy.array([
                          [rotation.real, -rotation.imag, 0],
                          [rotation.imag,  rotation.real, 0],
                          [0, 0, 1]])
@@ -89,7 +89,7 @@ def mat_rot(rotation):
 def mat_scale(scale):
     """Converts a scale complex number (real is x scale, imag is y scale) to an
     equivalent 3x3 homogenous matrix."""
-    return numpy.matrix([
+    return numpy.array([
                          [scale.real, 0, 0],
                          [0, scale.imag, 0],
                          [0, 0, 1]])
@@ -97,7 +97,7 @@ def mat_scale(scale):
 def mat_trans(translation):
     """Converts a translation complex number (real is x translation, imag is y translation) 
     to an equivalent 3x3 homogenous matrix."""
-    return numpy.matrix([
+    return numpy.array([
                          [1, 0, translation.real],
                          [0, 1, translation.imag],
                          [0, 0, 1]])
@@ -107,8 +107,8 @@ def svg_header(size, scale=1+1j, rotation=1+0j, extents=(0+0j,1+1j)):
     centre = extents[0] + (extents[1] - extents[0]) / 2
     
     # Operations - translate center to origin, scale, flip x axis, rotate, translate to new centre
-    result_mat = (mat_trans(size / 2) * mat_rot(rotation) * mat_scale(-1+1j)
-                  * mat_scale(scale) * mat_trans(-centre))
+    result_mat = (mat_trans(size / 2) @ mat_rot(rotation) @ mat_scale(-1+1j)
+                  @ mat_scale(scale) @ mat_trans(-centre))
     
     return SVG_HEADER.format(
         **merge_dicts(

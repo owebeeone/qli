@@ -23,6 +23,7 @@ dependencies = [
     "frozendict",
     "debugpy",
     "svg.path",
+    "numpy",
 ]
 
 [project.urls]
